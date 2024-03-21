@@ -3,13 +3,13 @@ import Header from "./Header";
 import { checkValidData } from '../utils/validation';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 import { addUser} from '../utils/userSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
   const [isLogin,setIsLogin] = useState(true);
   const [errorMsg,setErrorMsg] = useState(null);
   const email = useRef();
@@ -46,10 +46,12 @@ const Login = () => {
           dispatch(addUser(
             {uid : uid, email : email, displayName : displayName}
             ));
-          navigate("/browse");
+         
         }).catch((error) => {
           // An error occurred
-
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMsg(errorCode + " " + errorMessage);
         });
       
        
@@ -74,7 +76,7 @@ const Login = () => {
           dispatch(addUser(
             {uid : uid, email : email, displayName : displayName}
             ));
-          navigate("/browse");
+        
         })
         .catch((error) => {
           const errorCode = error.code;

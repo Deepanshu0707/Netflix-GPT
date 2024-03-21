@@ -1,21 +1,38 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase';
-import { signOut } from 'firebase/auth';
-import { UseSelector, useSelector } from 'react-redux';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { addUser,removeUser } from '../utils/userSlice';
+
+
 const Header = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state)=>state.user);
     console.log(user);
     const handleLogout = ()=>{
       //Signout API work for removing the login user for the app//
-      signOut(auth).then(() => {
-        navigate("/");
+      signOut(auth).then(() => {})
+      .catch((error) => {});
+    }
 
-      }).catch((error) => {
-        // An error happened
-      });
-  }
+    useEffect(()=>{
+      //onAuthStateChanged Is Like A Event Listener which keep record of Authentication state changed// 
+      onAuthStateChanged(auth, (user) => {
+          if (user) {
+            const {uid, email, displayName} = user;
+            dispatch(addUser(
+              {uid : uid, email : email, displayName : displayName}
+              ));
+           navigate('/browse');
+          } else {
+            dispatch(removeUser());
+            navigate('/');
+          }
+        });
+  },[])
   return (
     <div className='absolute w-full px-8 py-3 z-50 flex justify-between bg-gradient-to-b from-black'>
     <div>
