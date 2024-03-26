@@ -17,3 +17,17 @@
 - Netflix GPT
   -Search Bar
   -Movie Suggestion 
+
+
+
+
+
+  Browse Component Structure-
+
+   1. Header (It have)
+   2. Main Container -
+     SubPart: 1. Video Background
+            2. Video Title, description, button
+    3. Secondary Container - 
+    SubPart:  1. Movie Types  * n
+            2. cards * n
