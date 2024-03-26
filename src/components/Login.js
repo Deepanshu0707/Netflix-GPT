@@ -88,9 +88,7 @@ const Login = () => {
   }
   return (
     <div className='login-main-div'>
-
       <Header/>
-      
       <div className='bg-img absolute w-full'>
         <img src={netflixBGIMG} alt="bg-img" />
       </div>
