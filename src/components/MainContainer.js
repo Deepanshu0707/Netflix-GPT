@@ -9,11 +9,12 @@ const MainContainer = () => {
   
   if(!playingMovie) return;
   
-  const mainMovie = playingMovie[0];
+  const mainMovie = playingMovie[4];
   const {original_title, overview, id } = mainMovie;
 
   return (
-    <div>
+    <div className='w-screen h-screen'>
+      
       <VideoTitle title={original_title} overview={overview}/>
       <VideoBackground movieId={id}/>
     </div>
