@@ -41,11 +41,11 @@ const Header = () => {
         };
   },[])
   return (
-    <div className='fixed w-full px-8 py-3 z-50  flex justify-between bg-gradient-to-b from-black '>
+    <div className='absolute w-full px-9 py-3 z-50  flex justify-between bg-gradient-to-b from-black '>
     <div>
       <img className='w-[200px]' src={netflixLogo} alt="logo" />
     </div>
-    {user && <div className='flex justify-center items-center -mt-3'>
+    {user && <div className='flex justify-center items-center'>
     <img className='h-[39px] w-[39px] mr-4' src={userAvatarLogo} alt="user-logo" />
     <button className='font-bold text-white' onClick={handleLogout}>{user.displayName} &nbsp; (Logout)</button>
     </div>}
